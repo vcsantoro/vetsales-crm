@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import { leads as mockLeads } from "./mock";
 import type { Lead } from "./types";
 import { getSupabaseServer } from "./supabase-server";
 
@@ -12,9 +11,8 @@ function dbToLead(r:any):Lead{return {
 }}
 
 export async function getLeads():Promise<Lead[]> {
-  const configured=Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL&&process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
   const sb=await getSupabaseServer();
-  if(!configured||!sb) return mockLeads;
+  if(!sb) return [];
   const {data:{user}}=await sb.auth.getUser();
   if(!user) redirect("/login");
   const {data:memberships,error:membershipError}=await sb.from("workspace_members").select("workspace_id").eq("user_id",user.id).limit(1);
