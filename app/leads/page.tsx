@@ -1,0 +1,2 @@
+import {AppShell} from "@/components/app-shell";import {PageHead} from "@/components/page-head";import {LeadsTable} from "@/components/leads-table";import {getLeads} from "@/lib/data-access";
+export default async function LeadsPage(){const leads=await getLeads();return <AppShell><PageHead title="Leads" description={`${leads.length} registros na base`} action={<button className="btn">+ Novo lead</button>}/><LeadsTable leads={leads}/></AppShell>}
