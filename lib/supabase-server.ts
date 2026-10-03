@@ -9,9 +9,12 @@ export async function getSupabaseServer() {
   return createServerClient(url, key, {
     cookies: {
       getAll() { return cookieStore.getAll(); },
-      setAll(cookiesToSet) {
-        try { cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options)); }
-        catch { /* Server Components podem não permitir escrita; refresh de sessão fica no proxy futuro. */ }
+      setAll(cookiesToSet, _headers) {
+        try {
+          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
+        } catch {
+          // Server Components não podem escrever cookies; o proxy atualiza a sessão.
+        }
       }
     }
   });
