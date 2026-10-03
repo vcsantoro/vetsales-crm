@@ -45,3 +45,7 @@ As migrations estão em `supabase/migrations`.
 ## Segurança
 
 As tabelas expostas usam Row Level Security (RLS) por workspace. Credenciais sensíveis de provedores externos não devem ser armazenadas diretamente no cliente.
+
+## Deploy
+
+Projeto conectado à Vercel para deploy contínuo a partir da branch `main`.
