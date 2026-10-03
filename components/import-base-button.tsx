@@ -1,0 +1,3 @@
+"use client";
+import {useState} from "react";
+export function ImportBaseButton(){const[loading,setLoading]=useState(false);const[error,setError]=useState<string|null>(null);async function run(){setLoading(true);setError(null);const r=await fetch("/api/onboarding/import-leads",{method:"POST"});const j=await r.json();if(!r.ok){setError(j.error||"Falha ao importar");setLoading(false);return}window.location.reload()}return <div className="stack"><button className="btn" onClick={run} disabled={loading}>{loading?"Importando...":"Importar base inicial de 161 leads"}</button>{error&&<div className="notice">{error}</div>}</div>}

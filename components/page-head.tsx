@@ -1,0 +1,1 @@
+export function PageHead({title,description,action}:{title:string;description:string;action?:React.ReactNode}){return <div className="topbar"><div className="title"><h1>{title}</h1><p>{description}</p></div>{action}</div>}
